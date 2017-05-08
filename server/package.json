@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-register": "^6.24.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "koa-body": "^2.0.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^2.0.1",
+    "koa.res.api": "^1.0.11"
+  }
+}

@@ -1,0 +1,47 @@
+.App-logo
+  height: 100px
+  width: 400px
+
+//公共类
+.container
+  margin: 20px 40px
+  
+.bw
+  background-color: white
+.tc
+  text-align: center
+.tl
+  text-align: left
+.tr
+  text-align: right
+
+.fl
+  float: left
+.fr
+  float: right
+
+@for $i from 12 through 30
+  .fs-#{$i}
+    font-size: $i + px !important
+
+@for $i from 1 to 20
+  .p-#{5*$i}
+    padding: $i * 5px
+  .pl-#{5*$i}
+    padding-left: $i * 5px
+  .pr-#{5*$i}
+    padding-right: $i * 5px
+  .pt-#{5*$i}
+    padding-top: $i * 5px
+  .pb-#{5*$i}
+    padding-bottom: $i * 5px
+  .m-#{5*$i}
+    margin: $i * 5px
+  .ml-#{5*$i}
+    margin-left: $i * 5px
+  .mr-#{5*$i}
+    margin-right: $i * 5px
+  .mt-#{5*$i}
+    margin-top: $i * 5px
+  .mb-#{5*$i}
+    margin-bottom: $i * 5px
