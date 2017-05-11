@@ -6,12 +6,12 @@ import { createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import { Provider } from 'react-redux'
-import App from './App'
+import Home from './Home'
 import Nav from './Navbar'
 import Foot from './Footer'
 import { Layout } from 'antd'
 import ListContainer from '../containers/ListContainer'
-import Article from './article'
+import ArticleRoute from './article/ArticleRoute'
 
 const { Footer, Content } = Layout
 import {
@@ -28,21 +28,21 @@ const store = createStore(
     thunk
   )
 )
+
 class Root extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router
-          basename='/blog'
+          basename='/'  
         >
           <Layout>
             <Nav />
             <Content className='container'>
               <Redirect exact from='/' to='/home' />
-              <Route path='/home' component={App}/>
-              <Route path='/list' component={ListContainer} />
-              <Route path='/create' component={Article} />
-            </Content>
+              <Route path='/home' component={Home}/>
+              <Route path='/passage' component={ArticleRoute} />
+            </Content>  
             <Footer>
               <Foot />
             </Footer>

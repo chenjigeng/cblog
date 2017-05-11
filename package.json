@@ -5,16 +5,18 @@
   "proxy": "http://localhost:8000",
   "dependencies": {
     "antd": "^2.9.3",
+    "babel-polyfill": "^6.23.0",
     "co": "^4.6.0",
     "history": "^4.6.1",
     "isomorphic-fetch": "^2.2.1",
     "koa": "^2.2.0",
+    "koa-body": "^2.0.1",
     "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^2.0.1",
     "koa-route": "^3.2.0",
     "koa-router": "^7.1.1",
-    "koa-body": "^2.0.1",
-    "koa-logger": "^2.0.1",
     "mongoose": "^4.9.7",
+    "prop-types": "^15.5.9",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-markdown": "^2.5.0",
@@ -24,18 +26,18 @@
     "react-router-redux": "^4.0.8",
     "react-thunk": "^1.0.0",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0",
-    "babel-polyfill": "^6.23.0"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "node-sass-chokidar": "^0.0.1",
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start-js": "react-scripts start",
-    "start": "npm run watch-css & npm run start-js",
+    "start-js": "react-scripts start &",
+    "start": "npm run start-js && npm run server",
+    "server": "node server/app.js &",
     "build": "npm run build-css && react-scripts build",
-    "build-css": "node-sass-chokidar src/ -o src/",
+    "build-css": "node-sass-chokidar src/ -o src/ &",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import '../../styles/components/article/index.css'
-import { Button, Input, message } from 'antd'
+import { Button, Input, message, Modal } from 'antd'
 import fetch from 'isomorphic-fetch'
+import { withRouter } from 'react-router'
 
-class Article extends React.Component {
+class ArticleCreate extends React.Component {
   constructor() {
     super();
     this.value = ''
@@ -39,11 +40,27 @@ class Article extends React.Component {
       .then( (res) => {
         if (res.status === 200) {
           message.info("创建成功")
-
+          this.props.history.push('/list')
         }
       }, (res) => {
+        Modal.error({
+          title: '错误提示',
+          content: '创建失败'
+        })
         console.log(res);
       })
+    } else {
+      if (!title) {
+        Modal.error({
+          title: '错误提示',
+          content: '请输入标题'
+        })
+      } else if (!this.state.input) {
+        Modal.error({
+          title: '错误提示',
+          content: '请输入内容'
+        })
+      }
     }
   }
 
@@ -71,4 +88,4 @@ class Article extends React.Component {
   }
 }
 
-export default Article
+export default withRouter(ArticleCreate)

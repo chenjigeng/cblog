@@ -1,0 +1,8 @@
+.list {
+  padding: 20px 40px;
+  background: white; }
+  .list .content {
+    padding: 20px; }
+  .list .title {
+    font-size: 16px;
+    font-weight: bold; }

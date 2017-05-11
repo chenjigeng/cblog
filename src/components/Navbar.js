@@ -22,12 +22,12 @@ export default class Navbar extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key='list'>
-            <Link to='/list'>
+            <Link to='/passage/list'>
               <Icon type='mail'/> 文章列表
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to='/create'>
+            <Link to='/passage/create'>
               <Icon type='plus-circle' /> 创建文章
             </Link>
           </Menu.Item>

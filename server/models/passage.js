@@ -13,7 +13,15 @@ var PassageSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  authorId: Schema.Types.ObjectId 
+  authorId: Schema.Types.ObjectId,
+  watch: {
+    type: Number,
+    default: 0
+  },
+  comments: {
+    type: Array,
+    default: []
+  }
 })
 
 module.export = mongoose.model('Passage', PassageSchema);

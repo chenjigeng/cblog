@@ -1,5 +1,5 @@
 import React from 'react'
-import List from '../components/List'
+import List from '../components/article/ArticleList'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as listActions from '../actions/listAction'
