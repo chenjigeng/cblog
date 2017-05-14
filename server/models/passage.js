@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var PassageSchema = new mongoose.Schema({
-  _pid: Schema.Types.ObjectId,
+  pid: Number,
   title: String,
   content: String,
   createTime: {

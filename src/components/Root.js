@@ -13,12 +13,14 @@ import { Layout } from 'antd'
 import ListContainer from '../containers/ListContainer'
 import ArticleRoute from './article/ArticleRoute'
 
+
 const { Footer, Content } = Layout
 import {
   BrowserRouter as Router,
   Route,
   Redirect
 } from 'react-router-dom'
+
 
 
 const store = createStore(
@@ -39,9 +41,8 @@ class Root extends Component {
           <Layout>
             <Nav />
             <Content className='container'>
-              <Redirect exact from='/' to='/home' />
-              <Route path='/home' component={Home}/>
-              <Route path='/passage' component={ArticleRoute} />
+              <Route exact path='/home' component={Home}/>
+              <Route path='/passage' component={ArticleRoute} />           
             </Content>  
             <Footer>
               <Foot />

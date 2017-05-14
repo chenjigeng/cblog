@@ -43,8 +43,14 @@ export const fetchPassage= (id) => {
   return (dispatch, getState) => {
     dispatch(requestPassage())
     return fetch(`/api/passage/${id}`)
-      .then( response => response.json())
-      .then( json => dispatch(receivePassage(json)))
+      .then( response => {
+        console.log(response)
+        return response.json()
+      })
+      .then( json => {
+        console.log(json)
+        return dispatch(receivePassage(json))
+      })
   }
 }
 

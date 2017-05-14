@@ -13,7 +13,6 @@ export default class ArticleRoute extends React.Component {
   render() {
     return (
       <div>
-        <Redirect exact from='/passage/' to='/passage/list' />
         <Switch>
           <Route exact path='/passage/list' component={ArticleListContainer}/>
           <Route exact path='/passage/create' component={ArticleCreate}/>

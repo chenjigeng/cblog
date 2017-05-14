@@ -11,14 +11,14 @@ var res_api = require('koa.res.api')
 
 const app = new koa()
 
+
 //连接数据库
 mongoose.connect(config.db.path)
 
 
 app.use(logger())
-app.use(bodyParser());
+// app.use(bodyParser());
 app.use(koaBody())
-app.use(res_api())
 
 app.use(router.routes())
 app.listen(8000, function() {

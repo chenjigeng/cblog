@@ -2,25 +2,51 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter }  from 'react-router'
 import ReactMarkdown from 'react-markdown'
+import { bindActionCreators } from 'redux'
+import * as listActions from '../../actions/listAction'
+import { Spin } from 'antd'
 
 class ArticleView extends React.Component {
-  render() {
+
+  constructor() {
+    super()
+    if (this.props && !this.props.passage) {
+      console.log('123123')
+    }
+    console.log(123123)
     console.log(this)
-    return (
-      <div>
-        <h1>{this.props.passage.title}</h1>
-        <ReactMarkdown source={ this.props.passage.content }/>
-        <p>创建于: {this.props.passage.createTime} </p>
-        
-      </div>
-    )
+  }
+
+  render() {
+    if (this.props && !this.props.passage) {
+      this.props.actions
+        .fetchPassage(this.props.match.params.pid)
+        .then( (data) => console.log(data) )
+      return (
+        <Spin />
+      )
+    } else {
+      return (
+        <div>
+          <h1>{this.props.passage.title}</h1>
+          <p>{this.props.passage.content}</p>
+        </div>
+      )
+    }
   }
 }
 
 function mapStateToProps(state) {
   return {
-    passage: state.list.selectedItem
+    passage: state.list.selectedItem || null
   }
 }
 
-export default withRouter(connect(mapStateToProps)(ArticleView))
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(listActions, dispatch)
+  }
+}
+
+// export default ArticleView
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArticleView))

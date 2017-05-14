@@ -15,13 +15,13 @@ class ArticleList extends React.Component {
       })
     this.handleClick = this.handleClick.bind(this)
   }
-  handleClick(id, index) {
+  handleClick(id) {
     return () => {
       console.log(this)
       this.props.actions.selectPassage({
         "id": id
       })
-      this.props.history.push(`/passage/${index}`)
+      this.props.history.push(`/passage/${id}`)
     }
   }
   render() {
@@ -38,7 +38,7 @@ class ArticleList extends React.Component {
               this.props.data.items.map( (item, index) => {
                 return (
                   <div key={index}>
-                    <div className='title' onClick={this.handleClick(item._id)}>{item.title}</div>
+                    <div className='title' onClick={this.handleClick(item.pid)}>{item.title}</div>
                     <div className='createTime'>{item.createTime}</div>
                   </div>
                 )
