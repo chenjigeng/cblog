@@ -8,6 +8,7 @@ import {
 import ArticleListContainer from '../../containers/ListContainer'
 import ArticleCreate from './ArticleCreate'
 import ArticleView from './ArticleView'
+import ArticleEdit from './ArticleEdit'
 
 export default class ArticleRoute extends React.Component {
   render() {
@@ -16,7 +17,8 @@ export default class ArticleRoute extends React.Component {
         <Switch>
           <Route exact path='/passage/list' component={ArticleListContainer}/>
           <Route exact path='/passage/create' component={ArticleCreate}/>
-          <Route path='/passage/:pid' component={ArticleView}/>
+          <Route exact path='/passage/:pid' component={ArticleView}/>
+          <Route path='/passage/edit/:pid' component={ArticleEdit} />
         </Switch>       
       </div>
     )

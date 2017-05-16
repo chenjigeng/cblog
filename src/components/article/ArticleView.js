@@ -4,7 +4,7 @@ import { withRouter }  from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import { bindActionCreators } from 'redux'
 import * as listActions from '../../actions/listAction'
-import { Spin } from 'antd'
+import { Spin, message } from 'antd'
 
 class ArticleView extends React.Component {
 
@@ -21,7 +21,12 @@ class ArticleView extends React.Component {
     if (this.props && !this.props.passage) {
       this.props.actions
         .fetchPassage(this.props.match.params.pid)
-        .then( (data) => console.log(data) )
+        .then( (data) => {
+          if (data.data.status === 404) {
+            message.warning("文章不存在")
+            this.props.history.push('/passage/list')
+          }
+        } )
       return (
         <Spin />
       )

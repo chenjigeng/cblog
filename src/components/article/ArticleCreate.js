@@ -41,6 +41,8 @@ class ArticleCreate extends React.Component {
         if (res.status === 200) {
           message.info("创建成功")
           this.props.history.push('/list')
+        } else {
+          message.error('创建失败，请稍后重试')
         }
       }, (res) => {
         Modal.error({
