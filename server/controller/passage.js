@@ -36,7 +36,7 @@ module.exports = {
     console.log(ctx.request.body)
     console.log(ctx.params.pid)
     let pid = ctx.params.pid
-    passage = yield Passage.find({pid: pid })
+    let passage = yield Passage.find({pid: pid })
     if (passage.length === 0) {
       let response = {
         status: 404,
@@ -46,8 +46,11 @@ module.exports = {
       ctx.status = 200
       return;
     }
-    console.log(passage)
-    ctx.body = JSON.stringify(passage[0])
+    let response = {
+      status: 200,
+      passage: passage[0]
+    }
+    ctx.body = JSON.stringify(response)
     ctx.status = 200
   }
 }

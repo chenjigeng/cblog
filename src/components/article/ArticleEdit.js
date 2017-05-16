@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Button, Input, message, Modal } from 'antd'
+import { Button, Input, message, Modal, Spin } from 'antd'
 import fetch from 'isomorphic-fetch'
 import { withRouter } from 'react-router'
 import { findDOMNode } from 'react-dom'
@@ -15,12 +15,19 @@ class ArticleEdit extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleUpdate= this.handleUpdate.bind(this)
     console.log(this)
+    this.state = {
+      passage: null
+    }
   }
 
   handleChange(e) {
-    let value = e.target.value;
+    let titleNode = findDOMNode(this.refs.title)
+    let contentNode = findDOMNode(this.refs.content)
     this.setState({
-      input: value
+      passage: {
+        title: titleNode.value,
+        content: contentNode.value
+      }  
     })
   }
 
@@ -64,9 +71,8 @@ class ArticleEdit extends React.Component {
   }
 
   render() {
-    if (this.props && this.props.passage) {
-      let title = (this.props.passage && this.props.passage.title ) || '';
-      let text = (this.props.passage && this.props.passage.content ) || '';
+    if (this.state && this.state.passage) {
+      console.log(this.state.passage)
       return (
         <div>
           <h1 className='mb-20'>创建文章/编辑文章</h1>
@@ -77,16 +83,16 @@ class ArticleEdit extends React.Component {
               placeholder='请输入标题' 
               className='mb-20 fs-16' 
               size='large'
-              value={title}
+              value={ this.state.passage.title }
               onChange={ this.handleChange }
             />
             <textarea
               ref='content'
               className='markdown-editor'
-              value={ text }
+              value={ this.state.passage.content }
               onChange={ this.handleChange }
             />
-            <ReactMarkdown source={ text } className='markdown p-10 result'/>
+            <ReactMarkdown source={ this.state.passage.content } className='markdown p-10 result'/>
           </div>
           <div className='btn-group fr mt-20'>
             <Button type='primary' size='large' className='mr-15' onClick={ this.handleCreate }>创建</Button>
@@ -94,7 +100,7 @@ class ArticleEdit extends React.Component {
           </div>
         </div>
       )
-    } else {
+    } else if (this.props && !this.props.passage) {
       this.props.actions
         .fetchPassage(
           this.props.match.params.pid
@@ -104,10 +110,24 @@ class ArticleEdit extends React.Component {
           if (data.data.status === 404) {
             message.error('文章不存在')
             this.props.history.push('/passage/list')
+          } else if (data.data.status === 200) {
+            this.setState({
+              passage: {
+                title: data.data.passage.title,
+                content: data.data.passage.content
+              }
+            }, function() {
+              console.log(this)
+              console.log(this.state)
+            })
           }
         })
       return (
-        <div></div>
+        <Spin />
+      )
+    } else {
+      return (
+        <Spin />
       )
     }
     

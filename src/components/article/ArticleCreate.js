@@ -21,7 +21,9 @@ class ArticleCreate extends React.Component {
   }
 
   handleChange(e) {
+    console.log(e)
     let value = e.target.value;
+    console.log(value)
     this.setState({
       input: value
     })

@@ -18,7 +18,7 @@ function list(state = initState, action) {
     case 'GET_PASSAGE_BEGIN':
       return Object.assign({}, state, {"loading": true})
     case 'GET_PASSAGE_SUCCESS':
-      return Object.assign({}, state, { "selectedItem" : action.data, "loading": false })
+      return Object.assign({}, state, { "selectedItem" : action.data.passage, "loading": false })
     default:
       return state
   }
