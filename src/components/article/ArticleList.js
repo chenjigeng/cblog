@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin } from 'antd'
+import { Spin, message } from 'antd'
 import PropTypes from 'prop-types';
 import '../../styles/components/list.css'
 import { withRouter }  from 'react-router'
@@ -9,7 +9,13 @@ class ArticleList extends React.Component {
     this.props.actions.fetchPassage = this.props.actions.fetchPassage.bind(this);
     let content = this;
     this.props.actions.fetchPassages()
-      .then(function(data) {
+      .then( (data) => {
+        if (data.data.status === 500) {
+          message.warning('请检查网络状况，稍后重试')
+          console.log(this)
+          this.props.history.push('/home')
+          return
+        }
         console.log(data)
         console.log(content)
       })

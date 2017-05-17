@@ -1,9 +1,12 @@
+import * as EDIT_STATUS from '../constants/index'
+
 const initState = {
   "dirty": false,
   "items": [],
   "loading": true,
   "selectedItem": null,
-  "error": ""
+  "error": "",
+  "editing": EDIT_STATUS.EDIT_DEFAULT
 }
 
 function list(state = initState, action) {
@@ -12,6 +15,8 @@ function list(state = initState, action) {
       return Object.assign({}, state, {"loading": true})
     case 'GET_LIST_SUCCESS':
       return Object.assign({}, state, { "items" : action.data, "loading": false })
+    case 'GET_LIST_ERROR':
+      return Object.assign({}, state, { "loading": false, "error": action.data.message })
     case 'SELECT_PASSAGE':
       return Object.assign({}, state, {selectedItem: state.items.filter((item) => {
         return item.pid === action.data.id

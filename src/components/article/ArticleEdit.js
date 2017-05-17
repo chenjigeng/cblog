@@ -32,26 +32,28 @@ class ArticleEdit extends React.Component {
   }
 
   handleUpdate() {
-    let title = this.refs.title.refs.input.value
-    if (title && this.state.input) {
+    let title = findDOMNode(this.refs.title).value
+    let content = findDOMNode(this.refs.content).value
+    if (title && content) {
       fetch('/api/passage', {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({
+          'pid': this.props.match.params.pid,
           'title': title,
-          'content': this.state.input
+          'content': content
         })
       })
       .then( (res) => {
         if (res.status === 200) {
-          message.info("创建成功")
-          this.props.history.push('/list')
+          message.info("更新成功")
+          this.props.history.push('/passage/list')
         } else {
-          message.error('创建失败，请稍后重试')
+          message.error('更新失败，请稍后重试')
         }
       }, (res) => {
         Modal.error({
           title: '错误提示',
-          content: '创建失败'
+          content: '更新失败'
         })
         console.log(res);
       })
@@ -61,7 +63,7 @@ class ArticleEdit extends React.Component {
           title: '错误提示',
           content: '请输入标题'
         })
-      } else if (!this.state.input) {
+      } else if (!content) {
         Modal.error({
           title: '错误提示',
           content: '请输入内容'
@@ -75,7 +77,7 @@ class ArticleEdit extends React.Component {
       console.log(this.state.passage)
       return (
         <div>
-          <h1 className='mb-20'>创建文章/编辑文章</h1>
+          <h1 className='mb-20'>编辑文章</h1>
 
           <div className='edit'>
             <Input 
@@ -95,7 +97,7 @@ class ArticleEdit extends React.Component {
             <ReactMarkdown source={ this.state.passage.content } className='markdown p-10 result'/>
           </div>
           <div className='btn-group fr mt-20'>
-            <Button type='primary' size='large' className='mr-15' onClick={ this.handleCreate }>创建</Button>
+            <Button type='primary' size='large' className='mr-15' onClick={ this.handleUpdate }>更新</Button>
             <Button type='danger' size='large'>取消</Button>
           </div>
         </div>
@@ -120,6 +122,9 @@ class ArticleEdit extends React.Component {
               console.log(this)
               console.log(this.state)
             })
+          } else if (data.data.status === 500) {
+            message.error('请检查网络状况，稍后重试')
+            this.props.history.push('/home')
           }
         })
       return (
@@ -129,8 +134,7 @@ class ArticleEdit extends React.Component {
       return (
         <Spin />
       )
-    }
-    
+    } 
   }
 }
 
