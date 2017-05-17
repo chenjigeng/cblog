@@ -30,7 +30,9 @@
   },
   "devDependencies": {
     "node-sass-chokidar": "^0.0.1",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-register": "^6.24.1"
   },
   "scripts": {
     "start-js": "react-scripts start &",

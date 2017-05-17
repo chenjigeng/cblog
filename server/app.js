@@ -7,7 +7,6 @@ const router = require('./router/index')
 const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaBody = require('koa-body')
-var res_api = require('koa.res.api')
 
 const app = new koa()
 
