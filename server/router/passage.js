@@ -11,6 +11,8 @@ module.exports = function(router) {
   router
     .get('/api/passage', co.wrap(passageCtrl.get))
     .post('/api/passage', co.wrap(passageCtrl.create))
+    .put('/api/passage/', co.wrap(passageCtrl.updateById))
     .get('/api/passage/:pid', co.wrap(passageCtrl.getById))
+    
 
 }

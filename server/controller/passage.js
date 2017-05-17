@@ -43,7 +43,7 @@ module.exports = {
         body: '没有该文章'
       }
       ctx.body = JSON.stringify(response)
-      ctx.status = 200
+      ctx.status = 404
       return;
     }
     let response = {
@@ -52,5 +52,33 @@ module.exports = {
     }
     ctx.body = JSON.stringify(response)
     ctx.status = 200
+  },
+  updateById: function *(ctx, next) {
+    let data = {}
+    try {
+      data = JSON.parse(ctx.request.body);
+      console.log(data)
+    } catch(e) {
+      data.pid = ctx.request.body.pid
+      data.title = ctx.request.body.title
+      data.content = ctx.request.body.content
+    }
+
+    let res = yield Passage.update({pid: data.pid}, { $set: data})
+    console.log(res)
+    if (res.n > 0) {
+      ctx.status = 200
+      ctx.body = {
+        status: 200,
+        message: '更新成功'
+      }
+    } else {
+      ctx.status = 404;
+      ctx.body = {
+        status: 404,
+        message: "该文章不存在"
+      }
+    }
+    
   }
 }

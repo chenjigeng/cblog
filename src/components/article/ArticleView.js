@@ -22,6 +22,12 @@ class ArticleView extends React.Component {
       this.props.actions
         .fetchPassage(this.props.match.params.pid)
         .then( (data) => {
+          console.log(data)
+          if (data.data.status === 500) {
+            message.warning('请检查网络状况，稍后重试')
+            this.props.history.push('/home')
+            return
+          }
           if (data.data.status === 404) {
             message.warning("文章不存在")
             this.props.history.push('/passage/list')

@@ -27,6 +27,13 @@ export const receivePassage = (data) => {
   }
 }
 
+export const rejectPassage = (data) => {
+  return {
+    "type": "GET_PASSAGE_ERROR",
+    "data": data
+  }
+}
+
 export const fetchPassages = () => {
   return (dispatch, getState) => {
     dispatch(requestPassages());
@@ -39,15 +46,27 @@ export const fetchPassages = () => {
 }
 
 
-export const fetchPassage= (id) => {
+export const fetchPassage = (id) => {
   return (dispatch, getState) => {
     dispatch(requestPassage())
     return fetch(`/api/passage/${id}`)
       .then( response => {
         console.log(response)
+        if (response.status === 500) {
+          let data =  {
+            status: 500,
+            message: '请检查网络情况'
+          }
+          return data;
+        }
         return response.json()
+      }, reject => {
+        console.log(reject)
       })
       .then( json => {
+        if (json.status === 500) {
+          return dispatch(rejectPassage(json))
+        }
         console.log(json)
         return dispatch(receivePassage(json))
       })

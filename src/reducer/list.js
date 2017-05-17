@@ -2,7 +2,8 @@ const initState = {
   "dirty": false,
   "items": [],
   "loading": true,
-  "selectedItem": null
+  "selectedItem": null,
+  "error": ""
 }
 
 function list(state = initState, action) {
@@ -19,6 +20,8 @@ function list(state = initState, action) {
       return Object.assign({}, state, {"loading": true})
     case 'GET_PASSAGE_SUCCESS':
       return Object.assign({}, state, { "selectedItem" : action.data.passage, "loading": false })
+    case 'GET_PASSAGE_ERROR':
+      return Object.assign({}, state, { "loading": false, "error": action.data.message })
     default:
       return state
   }
