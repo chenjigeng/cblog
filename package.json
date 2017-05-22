@@ -38,9 +38,9 @@
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "npm-run-all --parallel start-backend start-js",
-    "start-backend": "start npm run  start-db && start npm run start-server",
-    "start-server": "node ./server/app.js",
+    "start": "npm-run-all --parallel start-backend start-js watch-css",
+    "start-backend": "start npm run start-db && start npm run start-server",
+    "start-server": "nodemon ./server/app.js",
     "start-db": "mongod",
     "start-app": "npm run start-server & npm run start-js",
     "start-js": "react-scripts start ",
