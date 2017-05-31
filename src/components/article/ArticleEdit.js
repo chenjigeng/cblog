@@ -7,6 +7,7 @@ import { findDOMNode } from 'react-dom'
 import * as listActions from '../../actions/listAction'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import PropTypes from 'prop-types';
 
 class ArticleEdit extends React.Component {
   constructor() {
@@ -136,6 +137,11 @@ class ArticleEdit extends React.Component {
       )
     } 
   }
+}
+
+ArticleEdit.propsTypes = {
+  passage: PropTypes.object,
+  actions: PropTypes.object
 }
 
 function mapStateToProps(state) {

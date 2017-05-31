@@ -5,6 +5,8 @@ import ReactMarkdown from 'react-markdown'
 import { bindActionCreators } from 'redux'
 import * as listActions from '../../actions/listAction'
 import { Spin, message } from 'antd'
+import '../../styles/components/article/view.css'
+import PropTypes from 'prop-types';
 
 class ArticleView extends React.Component {
 
@@ -38,13 +40,18 @@ class ArticleView extends React.Component {
       )
     } else {
       return (
-        <div>
-          <h1>{this.props.passage.title}</h1>
-          <p>{this.props.passage.content}</p>
+        <div className='article-view'>
+          <h1 className='title'>{this.props.passage.title}</h1>
+          <ReactMarkdown source={ this.props.passage.content } className='preview-markdown p-10 result'/>
         </div>
       )
     }
   }
+}
+
+ArticleView.PropsTypes = {
+  passage: PropTypes.object,
+  actions: PropTypes.object
 }
 
 function mapStateToProps(state) {

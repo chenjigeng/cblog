@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
-
+import PropTypes from 'prop-types';
 
 class Home extends React.Component {
   render() {
@@ -13,6 +13,11 @@ class Home extends React.Component {
       </div>
     )
   }
+}
+
+Home.PropTypes = {
+  state: PropTypes.object,
+  actions: PropTypes.object
 }
 
 function mapStateToProps(state) {

@@ -10,7 +10,6 @@ import Home from './Home'
 import Nav from './Navbar'
 import Foot from './Footer'
 import { Layout } from 'antd'
-import ListContainer from '../containers/ListContainer'
 import ArticleRoute from './article/ArticleRoute'
 
 
@@ -18,7 +17,6 @@ const { Footer, Content } = Layout
 import {
   BrowserRouter as Router,
   Route,
-  Redirect
 } from 'react-router-dom'
 
 

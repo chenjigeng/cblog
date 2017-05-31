@@ -4,6 +4,7 @@ import '../../styles/components/article/index.css'
 import { Button, Input, message, Modal } from 'antd'
 import fetch from 'isomorphic-fetch'
 import { withRouter } from 'react-router'
+import PropTypes from 'prop-types';
 
 class ArticleCreate extends React.Component {
   constructor() {
@@ -92,4 +93,7 @@ class ArticleCreate extends React.Component {
   }
 }
 
+ArticleCreate.propsTypes = {
+  history: PropTypes.object
+}
 export default withRouter(ArticleCreate)
