@@ -7,6 +7,8 @@ const router = require('./router/index')
 const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaBody = require('koa-body')
+var serve = require('koa-static')
+var fs = require('fs')
 
 const app = new koa()
 
@@ -20,6 +22,13 @@ app.use(logger())
 app.use(koaBody())
 
 app.use(router.routes())
+app.use(serve('./build'))
+
+app.use(async (ctx, next) => {
+  ctx.type = 'html'
+  ctx.body = fs.createReadStream('./build/index.html')
+})
+
 app.listen(8000, function() {
   console.log('connect');
 });
